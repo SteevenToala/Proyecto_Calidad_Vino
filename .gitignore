@@ -1,0 +1,121 @@
+# =============================================================================
+# .gitignore para Proyecto_Calidad_Vino
+# Clasificación de Calidad del Vino Tinto (PRISM, Lógica Difusa y AG)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Bytecode y Archivos Temporales de Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+*.pyo
+
+# C extensions y compilados
+*.so
+*.dll
+*.dylib
+
+# Distribución, empaquetado e instaladores
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# -----------------------------------------------------------------------------
+# 2. Entornos Virtuales
+# -----------------------------------------------------------------------------
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+bin/
+include/
+Lib/
+Scripts/
+
+# -----------------------------------------------------------------------------
+# 3. Configuraciones de Editores e IDEs
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# 4. Archivos Temporales del Sistema Operativo
+# -----------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+*.tmp
+*.temp
+
+# -----------------------------------------------------------------------------
+# 5. Jupyter Notebooks y Checkpoints
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# -----------------------------------------------------------------------------
+# 6. Archivos Auxiliares y Temporales de Compilación LaTeX (Informe)
+# -----------------------------------------------------------------------------
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.log
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.upa
+*.upb
+
+# -----------------------------------------------------------------------------
+# 7. Reglas de Exclusión Positiva (Proteger Datos, Informes e Imágenes)
+# -----------------------------------------------------------------------------
+# Preservar siempre el dataset fisicoquímico esencial
+!winequality-red.csv
+!*.csv
+
+# Preservar siempre los PDFs de informes y entregables
+!*.pdf
+
+# Preservar siempre las figuras y gráficos del sistema
+!*.png
+!*.jpg
+!*.jpeg
+!*.svg

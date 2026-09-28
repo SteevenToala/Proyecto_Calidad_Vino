@@ -1,0 +1,95 @@
+================================================================================
+PROYECTO: CLASIFICACION DE CALIDAD DEL VINO TINTO CON INTELIGENCIA ARTIFICIAL
+================================================================================
+
+Este proyecto implementa un flujo secuencial completo en memoria (sin dependencias web,
+sin servidores y sin archivos temporales) para predecir la calidad del vino tinto
+utilizando sus 11 variables fisicoquimicas.
+
+Flujo del Sistema Organizado por Fases:
+  1. Fase 1: Datos y Variables (Justificacion enologica, Pearson y terciles)
+  2. Fase 2: Induccion de Reglas Modulares con Algoritmo PRISM
+  3. Fase 3: Sistema de Inferencia Difusa Mamdani Continuo
+  4. Fase 4: Calibracion Evolutiva con Algoritmo Genetico (Cortes y Pesos)
+  5. Fase 5: Simulador Interactivo de Escritorio y Defuzzificacion (Centroide CoG)
+
+--------------------------------------------------------------------------------
+ESTRUCTURA DE ARCHIVOS POR FASES:
+--------------------------------------------------------------------------------
+Proyecto_Calidad_Vino/
+│
+├── winequality-red.csv             # Dataset fisicoquimico (1,599 muestras)
+├── main.py                         # Punto de entrada principal (consola o GUI)
+├── modelo.py                       # Orquestador general que enlaza las 4 fases
+├── interfaz.py                     # Interfaz de escritorio nativa (Tkinter + Matplotlib)
+│
+├── Fase_1_Datos/
+│   ├── __init__.py
+│   └── preparacion.py              # Carga, justificaciones enologicas y particion 80/20
+│
+├── Fase_2_PRISM/
+│   ├── __init__.py
+│   └── prism.py                    # Induccion modular de reglas y evaluacion rigida
+│
+├── Fase_3_Logica_Difusa/
+│   ├── __init__.py
+│   └── difuso.py                   # Inferencia Mamdani continua con operador MIN
+│
+└── Fase_4_Algoritmo_Genetico/
+    ├── __init__.py
+    └── genetico.py                 # Algoritmo genetico vectorizado (25 ind x 25 gen)
+
+--------------------------------------------------------------------------------
+COMO EJECUTAR EL PROYECTO:
+--------------------------------------------------------------------------------
+1. Aplicacion de Escritorio Completa (Ventana por fases con graficos):
+   python main.py
+
+2. Modo Consola (Pipeline secuencial en terminal sin abrir ventana):
+   python main.py --consola
+
+3. Ejecucion individual e independiente de cada fase (con sus propios graficos):
+   python Fase_1_Datos/preparacion.py
+   python Fase_2_PRISM/prism.py
+   python Fase_3_Logica_Difusa/difuso.py
+   python Fase_4_Algoritmo_Genetico/genetico.py
+
+--------------------------------------------------------------------------------
+VISUALIZACION GRAFICA EN CADA FASE:
+--------------------------------------------------------------------------------
+- Fase 1: Distribucion de clases de calidad (barras) y Coeficiente de Pearson
+          de las 11 variables quimicas con impacto positivo y negativo.
+- Fase 2: Cantidad de reglas inducidas por clase consecuente (Alta, Media, Baja)
+          y precision promedio obtenida por PRISM.
+- Fase 3: Curvas continuas de funciones de pertenencia difusa (triangulares y
+          trapezoidales) con selector para inspeccionar cualquiera de las 11 variables.
+- Fase 4: Curva de convergencia generacional del Fitness del Algoritmo Genetico
+          y comparativa visual del salto de exactitud a traves de las fases.
+- Fase 5: Simulador en vivo con sliders de las 11 variables, presets tipicos y
+          grafico en tiempo real de Defuzzificacion Mamdani (areas recortadas por MIN,
+          agregacion MAX y linea de Centroide de Gravedad CoG).
+
+--------------------------------------------------------------------------------
+GUIA PARA DEFENSA ACADEMICA:
+--------------------------------------------------------------------------------
+1. ¿Por que conservar las 11 variables?
+   En enologia, la calidad del vino es el resultado de un equilibrio multifactorial:
+   el alcohol da cuerpo y calidez (+0.48), los sulfatos preservan la frescura (+0.25),
+   mientras que la acidez volatil produce olor y sabor a vinagre (-0.39). PRISM
+   descubre combinaciones quimicas no lineales que justifican la clasificacion.
+
+2. ¿Que es el Boundary Problem de PRISM rigido?
+   PRISM genera cortes booleanos estrictos. Si una regla exige "alcohol >= 10.8%"
+   y una muestra tiene 10.79%, la regla se anula por completo, causando que PRISM
+   rigido solo alcance ~33-35% de exactitud.
+
+3. ¿Como lo resuelve la Logica Difusa de Mamdani?
+   Permite pertenencias graduales entre 0 y 1. Un vino con 10.79% tiene alta
+   pertenencia en medio y leve en alto, activando las reglas proporcionalmente.
+   Esto eleva la exactitud inmediatamente a ~60% (+27 puntos porcentuales en Test).
+
+4. ¿Que aporta el Algoritmo Genetico?
+   Los terciles iniciales (33% y 66%) son aproximaciones estadisticas fijas.
+   El AG ajusta de forma adaptativa los vertices de los triangulos difusos y
+   asigna un peso ponderado a cada regla, alcanzando ~63-65% de exactitud
+   y podando reglas que no aporten valor.
